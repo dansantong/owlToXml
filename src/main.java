@@ -1,14 +1,11 @@
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.*;
 
 import org.apache.jena.ontology.*;
 import org.apache.jena.rdf.model.*;
 
 import java.io.File;
-import java.util.Map;
 
 import javax.naming.Name;
 import javax.xml.parsers.DocumentBuilder;
@@ -25,10 +22,16 @@ import org.w3c.dom.Element;
 
 public class main {
     public static void main(String args[]) throws FileNotFoundException, ParserConfigurationException, TransformerException {
-        //加载owl文件
+        //提示用户输入待解析的owl文件的位置
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Please input the location of the owl file:(E.g. c://Users//example.owl)\n");
+        String location = sc.next();
+        //根据输入的location加载owl文件
         OntModel ontModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM);
-        ontModel.read(new FileInputStream("c://Users//dansan//dansan.owl"), "");
-
+        ontModel.read(new FileInputStream(location), "");
+        //由用户输入namespace
+        System.out.println("Please input the desired OPC UA Namespace:(E.g. motor)\n");
+        String nameSpace = sc.next();
         // 创建xml解析器工厂
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = factory.newDocumentBuilder();
@@ -40,10 +43,10 @@ public class main {
         ModelDesign.setAttribute("xmlns:uax","http://opcfoundation.org/UA/2008/02/Types.xsd");
         ModelDesign.setAttribute("xmlns:xsi","http://www.w3.org/2001/XMLSchema-instance");
         ModelDesign.setAttribute("xmlns:ua","http://opcfoundation.org/UA/");
-        ModelDesign.setAttribute("xmlns:FAN","https://opcua.dansan/UA/fan/");
+        ModelDesign.setAttribute("xmlns:"+nameSpace.toUpperCase(),"https://opcua.dansan/UA/"+nameSpace.toLowerCase()+"/");
         ModelDesign.setAttribute("xmlns:xsd","http://www.w3.org/2001/XMLSchema");
-        ModelDesign.setAttribute("TargetNamespace","https://opcua.dansan/UA/fan/");
-        ModelDesign.setAttribute("TargetXmlNamespace","https://opcua.dansan/UA/fan/");
+        ModelDesign.setAttribute("TargetNamespace","https://opcua.dansan/UA/"+nameSpace.toLowerCase()+"/");
+        ModelDesign.setAttribute("TargetXmlNamespace","https://opcua.dansan/UA/"+nameSpace.toLowerCase()+"/");
         ModelDesign.setAttribute("TargetVersion","0.9.0");
         ModelDesign.setAttribute("TargetPublicationDate","2019-04-01T00:00:00Z");
         ModelDesign.setAttribute("xmlns","http://opcfoundation.org/UA/ModelDesign.xsd");
@@ -54,11 +57,11 @@ public class main {
 
         //向Namespaces节点中添加节点Namespace
         Element Namespace1 = document.createElement("Namespace");
-        Namespace1.setAttribute("Name","fan");
-        Namespace1.setAttribute("Prefix","fan");
-        Namespace1.setAttribute("XmlNamespace","https://opcua.dansan/UA/fan/Types.xsd");
-        Namespace1.setAttribute("XmlPrefix","fan");
-        Namespace1.setTextContent("https://opcua.dansan/UA/fan/");
+        Namespace1.setAttribute("Name",nameSpace.toLowerCase());
+        Namespace1.setAttribute("Prefix",nameSpace.toLowerCase());
+        Namespace1.setAttribute("XmlNamespace","https://opcua.dansan/UA/"+nameSpace.toLowerCase()+"/Types.xsd");
+        Namespace1.setAttribute("XmlPrefix",nameSpace.toLowerCase());
+        Namespace1.setTextContent("https://opcua.dansan/UA/"+nameSpace.toLowerCase()+"/");
 
         Element Namespace2 = document.createElement("Namespace");
         Namespace2.setAttribute("Name","OpcUa");
@@ -80,7 +83,7 @@ public class main {
                 System.out.print("Class:");
                 System.out.println(c.getLocalName());
                 Element ObjectType = document.createElement("ObjectType");
-                ObjectType.setAttribute("SymbolicName","FAN:"+c.getLocalName());
+                ObjectType.setAttribute("SymbolicName",nameSpace.toUpperCase()+":"+c.getLocalName());
                 ObjectType.setAttribute("BaseType","ua:BaseObjectType");
                 ObjectType.setAttribute("SupportsEvents","true");
                 clazz.put(c.getLocalName(),ObjectType);
@@ -105,7 +108,7 @@ public class main {
             Element Children = dataProperty.get(domain);
             Element Property = document.createElement("Property");
             Children.appendChild(Property);
-            Property.setAttribute("SymbolicName","FAN:"+name);
+            Property.setAttribute("SymbolicName",nameSpace.toUpperCase()+":"+name);
             if(dp.getRange()!=null){
                 System.out.println("range:" + dp.getRange().getLocalName());
                 String range = dp.getRange().getLocalName();
@@ -124,7 +127,7 @@ public class main {
             System.out.println("domain:"+op.getDomain().getLocalName());
             System.out.println("range:" + op.getRange().getLocalName());
             Element ReferenceType = document.createElement("ReferenceType");
-            ReferenceType.setAttribute("SymbolicName","FAN:"+op.getLocalName());
+            ReferenceType.setAttribute("SymbolicName",nameSpace.toUpperCase()+":"+op.getLocalName());
             ReferenceType.setAttribute("BaseType","ua:NonHierarchicalReferences");
             ReferenceType.setAttribute("Symmetric","true");
             ReferenceType.setAttribute("IsAbstract","false");
@@ -143,7 +146,7 @@ public class main {
         // 输出内容使用缩进
         tf.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
         // 创建xml文件并写入内容
-        tf.transform(new DOMSource(document), new StreamResult(new File("fan.xml")));
+        tf.transform(new DOMSource(document), new StreamResult(new File(nameSpace.toLowerCase()+".xml")));
         System.out.println("生成xml成功");
     }
 }
