@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><ModelDesign xmlns="http://opcfoundation.org/UA/ModelDesign.xsd" xmlns:MOVIE="https://opcua.dansan/UA/movie/" xmlns:ua="http://opcfoundation.org/UA/" xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" TargetNamespace="https://opcua.dansan/UA/movie/" TargetPublicationDate="2019-04-01T00:00:00Z" TargetVersion="0.9.0" TargetXmlNamespace="https://opcua.dansan/UA/movie/">
+    <Namespaces>
+        <Namespace Name="movie" Prefix="movie" XmlNamespace="https://opcua.dansan/UA/movie/Types.xsd" XmlPrefix="movie">https://opcua.dansan/UA/movie/</Namespace>
+        <Namespace InternalPrefix="Opc.Ua.Server" Name="OpcUa" Prefix="Opc.Ua" PublicationDate="2013-12-02T00:00:00Z" Version="1.03" XmlNamespace="http://opcfoundation.org/UA/2008/02/Types.xsd" XmlPrefix="OpcUa">http://opcfoundation.org/UA/</Namespace>
+    </Namespaces>
+    <ObjectType BaseType="ua:BaseObjectType" SupportsEvents="true" SymbolicName="MOVIE:genre">
+        <Children>
+            <Property DataType="ua:Integer" ModellingRule="Mandatory" SymbolicName="MOVIE:genre_genre_id" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="MOVIE:genre_genre_name" ValueRank="Scalar"/>
+        </Children>
+    </ObjectType>
+    <ObjectType BaseType="ua:BaseObjectType" SupportsEvents="true" SymbolicName="MOVIE:movie">
+        <Children>
+            <Property DataType="ua:Double" ModellingRule="Mandatory" SymbolicName="MOVIE:movie_movie_rating" ValueRank="Scalar"/>
+            <Property DataType="ua:Integer" ModellingRule="Mandatory" SymbolicName="MOVIE:movie_movie_id" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="MOVIE:movie_movie_introduction" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="MOVIE:movie_movie_release_date" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="MOVIE:movie_movie_title" ValueRank="Scalar"/>
+        </Children>
+    </ObjectType>
+    <ObjectType BaseType="ua:BaseObjectType" SupportsEvents="true" SymbolicName="MOVIE:person">
+        <Children>
+            <Property ModellingRule="Mandatory" SymbolicName="MOVIE:person_person_birth_place" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="MOVIE:person_person_name" ValueRank="Scalar"/>
+            <Property DataType="ua:Integer" ModellingRule="Mandatory" SymbolicName="MOVIE:person_person_id" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="MOVIE:person_person_birth_day" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="MOVIE:person_person_english_name" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="MOVIE:person_person_death_day" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="MOVIE:person_person_biography" ValueRank="Scalar"/>
+        </Children>
+    </ObjectType>
+    <ReferenceType BaseType="ua:NonHierarchicalReferences" IsAbstract="false" SymbolicName="MOVIE:movie_to_genre" Symmetric="true"/>
+    <ReferenceType BaseType="ua:NonHierarchicalReferences" IsAbstract="false" SymbolicName="MOVIE:person_to_movie" Symmetric="true"/>
+</ModelDesign>

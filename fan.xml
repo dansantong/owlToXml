@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><ModelDesign xmlns="http://opcfoundation.org/UA/ModelDesign.xsd" xmlns:FAN="https://opcua.dansan/UA/fan/" xmlns:ua="http://opcfoundation.org/UA/" xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" TargetNamespace="https://opcua.dansan/UA/fan/" TargetPublicationDate="2019-04-01T00:00:00Z" TargetVersion="0.9.0" TargetXmlNamespace="https://opcua.dansan/UA/fan/">
+    <Namespaces>
+        <Namespace Name="fan" Prefix="fan" XmlNamespace="https://opcua.dansan/UA/fan/Types.xsd" XmlPrefix="fan">https://opcua.dansan/UA/fan/</Namespace>
+        <Namespace InternalPrefix="Opc.Ua.Server" Name="OpcUa" Prefix="Opc.Ua" PublicationDate="2013-12-02T00:00:00Z" Version="1.03" XmlNamespace="http://opcfoundation.org/UA/2008/02/Types.xsd" XmlPrefix="OpcUa">http://opcfoundation.org/UA/</Namespace>
+    </Namespaces>
+    <ObjectType BaseType="ua:BaseObjectType" SupportsEvents="true" SymbolicName="FAN:fan">
+        <Children>
+            <Property ModellingRule="Mandatory" SymbolicName="FAN:fan_wind_direction_mean" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="FAN:fan_pitch2_ng5_DC" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="FAN:fan_power" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="FAN:fan_yaw_position" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="FAN:fan_pitch1_angle" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="FAN:fan_pitch2_angle" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="FAN:fan_pitch3_speed" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="FAN:fan_pitch3_ng5_DC" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="FAN:fan_pitch1_speed" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="FAN:fan_pitch3_moto_tmp" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="FAN:fan_pitch2_ng5_tmp" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="FAN:fan_pitch1_ng5_tmp" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="FAN:fan_environment_tmp" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="FAN:fan_pitch1_moto_tmp" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="FAN:fan_time" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="FAN:fan_pitch2_speed" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="FAN:fan_pitch3_ng5_tmp" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="FAN:fan_pitch1_ng5_DC" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="FAN:fan_wind_direction" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="FAN:fan_group" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="FAN:fan_int_tmp" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="FAN:fan_pitch3_angle" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="FAN:fan_yaw_speed" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="FAN:fan_wind_speed" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="FAN:fan_generator_speed" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="FAN:fan_acc_x" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="FAN:fan_pitch2_moto_tmp" ValueRank="Scalar"/>
+            <Property ModellingRule="Mandatory" SymbolicName="FAN:fan_acc_y" ValueRank="Scalar"/>
+        </Children>
+    </ObjectType>
+</ModelDesign>
